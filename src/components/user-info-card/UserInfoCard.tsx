@@ -1,38 +1,69 @@
 import moment from 'moment';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, StyleSheet, Image, Text} from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import {User} from '../../types';
 
 interface Props {
   userData: User;
 }
 
-const UserInfoCard: React.FC<Props> = ({userData}) => (
-  <View style={styles.container}>
-    <Image style={styles.avatar} source={{uri: userData.picture.large}} />
-    <View style={styles.description}>
-      <View style={styles.descriptionHeader}>
-        <Text
-          style={
-            styles.titleLabel
-          }>{`${userData.name.first} ${userData.name.last}`}</Text>
-        <Text>Ph: {userData.cell}</Text>
-      </View>
-      <View style={styles.descriptionBody}>
-        <View style={styles.descriptionBodyRow}>
-          <Text style={styles.bodyLabel}>Gender: {userData.gender}</Text>
-          <Text style={styles.bodyLabel}>
-            DOB: {moment(userData.dob.date).format('DD-MMM-YYYY')}
-          </Text>
+const UserInfoCard: React.FC<Props> = ({userData}) => {
+  const top = useSharedValue(150);
+
+  const animatedContainerStyle = useAnimatedStyle(() => {
+    return {
+      margin: 8,
+      padding: 8,
+      backgroundColor: 'white',
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
+      display: 'flex',
+      flexDirection: 'column',
+      borderRadius: 2,
+      alignItems: 'center',
+      transform: [{translateY: top.value}],
+    };
+  });
+
+  useEffect(() => {
+    top.value = withTiming(0, {duration: 200});
+  }, [top]);
+
+  return (
+    <Animated.View style={animatedContainerStyle}>
+      <Image style={styles.avatar} source={{uri: userData.picture.large}} />
+      <View style={styles.description}>
+        <View style={styles.descriptionHeader}>
+          <Text
+            style={
+              styles.titleLabel
+            }>{`${userData.name.first} ${userData.name.last}`}</Text>
+          <Text>Ph: {userData.cell}</Text>
         </View>
-        <View style={styles.descriptionBodyRow}>
-          <Text style={styles.bodyLabel}>City: {userData.location.state}</Text>
-          <Text style={styles.bodyLabel}>{userData.email}</Text>
+        <View style={styles.descriptionBody}>
+          <View style={styles.descriptionBodyRow}>
+            <Text style={styles.bodyLabel}>Gender: {userData.gender}</Text>
+            <Text style={styles.bodyLabel}>
+              DOB: {moment(userData.dob.date).format('DD-MMM-YYYY')}
+            </Text>
+          </View>
+          <View style={styles.descriptionBodyRow}>
+            <Text style={styles.bodyLabel}>
+              City: {userData.location.state}
+            </Text>
+            <Text style={styles.bodyLabel}>{userData.email}</Text>
+          </View>
         </View>
       </View>
-    </View>
-  </View>
-);
+    </Animated.View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
