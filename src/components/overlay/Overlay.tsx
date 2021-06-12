@@ -56,10 +56,11 @@ const styles = StyleSheet.create({
   },
   innerWrapper: {
     flex: 1,
-    backgroundColor: 'rgba(52, 52, 52, 0.8)',
+    backgroundColor: 'rgba(52, 52, 52, 0.5)',
+  },
+  overlayWrapperImage: {
     opacity: 0.85,
   },
-  overlayWrapperImage: {},
 });
 
 export default Overlay;

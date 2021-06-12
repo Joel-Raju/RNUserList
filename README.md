@@ -10,3 +10,15 @@ Shows a list of users
 - Overlay UI was made by adding a View in the root most node and this view had a press event handler for handling the backdrop press
 - `useOverlay` hook exposes the properties of the overlay context and also handles the backdrop press callback
 - The blur effect was achieved by using an `ImageBackground` and its `opacity` style
+
+## Running the app
+
+- `yarn install`
+
+### Android
+
+`npx react-native run-android`
+
+### IOS
+
+`npx react-native run-ios`

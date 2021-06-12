@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, useColorScheme} from 'react-native';
+import {SafeAreaView, useColorScheme, View} from 'react-native';
 import Contacts from './src/containers/Contacts';
 import {OverlayProvider, Overlay} from './src/components';
 import {Colors} from './src/utils/colors';
@@ -16,9 +16,11 @@ const App = () => {
 
   return (
     <OverlayProvider>
-      <SafeAreaView style={backgroundStyle}>
-        <Contacts />
-        <Overlay backgroundImgUri={OVERLAY_BG_IMG} />
+      <SafeAreaView style={[{flex: 1}, backgroundStyle]}>
+        <View>
+          <Contacts />
+          <Overlay backgroundImgUri={OVERLAY_BG_IMG} />
+        </View>
       </SafeAreaView>
     </OverlayProvider>
   );
