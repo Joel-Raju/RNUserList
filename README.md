@@ -14,7 +14,7 @@ App has a single screen which shows a list of users from the [randomuser API](ht
 ## Running the app
 
 - `yarn install` - install npm dependencies
-- `yarn bootstrap` - intall IOS dependencies
+- `yarn bootstrap` - install IOS dependencies
 
 ### Android
 
