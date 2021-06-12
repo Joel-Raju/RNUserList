@@ -16,10 +16,7 @@ const Contacts: React.FC = () => {
     setActiveUser(undefined);
   };
 
-  const {setVisible: setOverlayVisible} = useOverlay(
-    'Contacts.tsx',
-    dismissUserDetailOverlay,
-  );
+  const {setVisible: setOverlayVisible} = useOverlay(dismissUserDetailOverlay);
 
   useEffect(() => {
     async function getUsers() {

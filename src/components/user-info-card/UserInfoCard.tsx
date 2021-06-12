@@ -66,18 +66,6 @@ const UserInfoCard: React.FC<Props> = ({userData}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 8,
-    padding: 8,
-    backgroundColor: 'white',
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-    display: 'flex',
-    flexDirection: 'column',
-    borderRadius: 2,
-    alignItems: 'center',
-  },
   avatar: {
     width: 120,
     height: 120,

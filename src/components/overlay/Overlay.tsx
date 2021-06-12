@@ -1,6 +1,4 @@
-import React from 'react';
-import {useCallback} from 'react';
-import {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {
   StyleSheet,
   ImageBackground,
@@ -16,11 +14,7 @@ interface Props {
 }
 
 const Overlay: React.FC<Props> = ({backgroundImgUri}) => {
-  const {
-    isVisible,
-    OverlayContent: children,
-    onBackdropPress,
-  } = useOverlay('Overlay.tsx');
+  const {isVisible, OverlayContent: children, onBackdropPress} = useOverlay();
 
   const handleBackButtonClick = useCallback((): boolean => {
     onBackdropPress();
