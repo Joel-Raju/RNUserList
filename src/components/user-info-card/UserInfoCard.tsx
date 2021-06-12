@@ -1,12 +1,13 @@
 import moment from 'moment';
 import React, {useEffect} from 'react';
-import {View, StyleSheet, Image, Text} from 'react-native';
+import {View, StyleSheet, Image, Text, useColorScheme} from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 import {User} from '../../types';
+import {Colors} from '../../utils/colors';
 
 interface Props {
   userData: User;
@@ -15,11 +16,20 @@ interface Props {
 const UserInfoCard: React.FC<Props> = ({userData}) => {
   const top = useSharedValue(150);
 
+  const isDarkMode = useColorScheme() === 'dark';
+
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? 'black' : Colors.LIGHT_BG,
+  };
+
+  const textStyle = {
+    color: isDarkMode ? Colors.LIGHT_TEXT : Colors.DARK_TEXT,
+  };
+
   const animatedContainerStyle = useAnimatedStyle(() => {
     return {
       margin: 8,
       padding: 8,
-      backgroundColor: 'white',
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,
@@ -36,28 +46,31 @@ const UserInfoCard: React.FC<Props> = ({userData}) => {
   }, [top]);
 
   return (
-    <Animated.View style={animatedContainerStyle}>
+    <Animated.View style={[animatedContainerStyle, backgroundStyle]}>
       <Image style={styles.avatar} source={{uri: userData.picture.large}} />
       <View style={styles.description}>
         <View style={styles.descriptionHeader}>
           <Text
-            style={
-              styles.titleLabel
-            }>{`${userData.name.first} ${userData.name.last}`}</Text>
-          <Text>Ph: {userData.cell}</Text>
+            style={[
+              styles.titleLabel,
+              textStyle,
+            ]}>{`${userData.name.first} ${userData.name.last}`}</Text>
+          <Text style={textStyle}>Ph: {userData.cell}</Text>
         </View>
         <View style={styles.descriptionBody}>
           <View style={styles.descriptionBodyRow}>
-            <Text style={styles.bodyLabel}>Gender: {userData.gender}</Text>
-            <Text style={styles.bodyLabel}>
+            <Text style={[styles.bodyLabel, textStyle]}>
+              Gender: {userData.gender}
+            </Text>
+            <Text style={[styles.bodyLabel, textStyle]}>
               DOB: {moment(userData.dob.date).format('DD-MMM-YYYY')}
             </Text>
           </View>
           <View style={styles.descriptionBodyRow}>
-            <Text style={styles.bodyLabel}>
+            <Text style={[styles.bodyLabel, textStyle]}>
               City: {userData.location.state}
             </Text>
-            <Text style={styles.bodyLabel}>{userData.email}</Text>
+            <Text style={[styles.bodyLabel, textStyle]}>{userData.email}</Text>
           </View>
         </View>
       </View>

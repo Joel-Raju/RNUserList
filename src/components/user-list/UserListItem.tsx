@@ -1,6 +1,14 @@
 import React from 'react';
-import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+} from 'react-native';
 import {User} from '../../types';
+import {Colors} from '../../utils/colors';
 
 interface Props {
   userData: User;
@@ -8,21 +16,33 @@ interface Props {
 }
 
 const UserListItem: React.FC<Props> = ({onLongPress, userData}) => {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.DARK_BG : Colors.LIGHT_BG,
+    borderBottomColor: isDarkMode ? Colors.LIGHT_BG : Colors.DARK_BORDER,
+  };
+
+  const textStyle = {
+    color: isDarkMode ? Colors.LIGHT_TEXT : Colors.DARK_TEXT,
+  };
+
   const handleLongPress = () => {
     onLongPress(userData);
   };
 
   return (
     <TouchableOpacity onLongPress={handleLongPress}>
-      <View style={styles.mainWrapper}>
+      <View style={[styles.mainWrapper, backgroundStyle]}>
         <Image style={styles.avatar} source={{uri: userData.picture.medium}} />
         <View>
           <View style={styles.userDescription}>
             <Text
-              style={
-                styles.userName
-              }>{`${userData.name.first} ${userData.name.last}`}</Text>
-            <Text style={styles.userPhone}>{userData.phone}</Text>
+              style={[
+                styles.userName,
+                textStyle,
+              ]}>{`${userData.name.first} ${userData.name.last}`}</Text>
+            <Text style={[styles.userPhone, textStyle]}>{userData.phone}</Text>
           </View>
         </View>
       </View>
@@ -35,7 +55,7 @@ const styles = StyleSheet.create({
     padding: 12,
     display: 'flex',
     flexDirection: 'row',
-    borderBottomColor: 'rgba(0, 0, 0, .2)',
+    borderBottomColor: Colors.DARK_BORDER,
     borderBottomWidth: 0.5,
   },
   userDescription: {

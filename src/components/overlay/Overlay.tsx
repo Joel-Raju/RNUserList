@@ -2,7 +2,6 @@ import React, {useCallback, useEffect} from 'react';
 import {
   StyleSheet,
   ImageBackground,
-  Platform,
   TouchableWithoutFeedback,
   View,
   BackHandler,
@@ -53,6 +52,7 @@ const styles = StyleSheet.create({
   wrapper: {
     ...StyleSheet.absoluteFillObject,
     flex: 1,
+    elevation: 1000,
   },
   innerWrapper: {
     flex: 1,
