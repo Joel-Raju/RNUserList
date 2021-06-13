@@ -7,7 +7,7 @@ App has a single screen which shows a list of users from the [randomuser API](ht
 ### Building the overlay
 
 - An overlay `Context` was created which holds the visibility state, element to be rendered in the overlay and the callback to be executed when pressing on the overlay backdrop
-- Overlay UI was made by adding a View in the root most node and this view had a press event handler for handling the backdrop press
+- Overlay UI was made by adding a View in the root most node and this view has a press event handler for handling the backdrop press
 - `useOverlay` hook exposes the properties of the overlay context and also handles the backdrop press callback
 - The blur effect was achieved by using an `ImageBackground` and its `opacity`
 
@@ -18,8 +18,8 @@ App has a single screen which shows a list of users from the [randomuser API](ht
 
 ### Android
 
-`yarn android`
+`yarn android` - runs build on android
 
 ### IOS
 
-`yarn ios`
+`yarn ios` - runs build on ios
