@@ -55,8 +55,6 @@ const styles = StyleSheet.create({
     padding: 12,
     display: 'flex',
     flexDirection: 'row',
-    borderBottomColor: Colors.DARK_BORDER,
-    borderBottomWidth: 0.5,
   },
   userDescription: {
     padding: 8,

@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, StyleSheet} from 'react-native';
 import {User} from '../../types';
+import {Colors} from '../../utils/colors';
 import UserListItem from './UserListItem';
 
 interface Props {
@@ -17,9 +18,17 @@ const UserList: React.FC<Props> = ({users, onLongPressUser}) => {
         renderItem={({item}) => (
           <UserListItem userData={item} onLongPress={onLongPressUser} />
         )}
+        ItemSeparatorComponent={() => <View style={styles.listSeparator} />}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  listSeparator: {
+    height: 0.5,
+    backgroundColor: Colors.DARK_BORDER,
+  },
+});
 
 export default UserList;

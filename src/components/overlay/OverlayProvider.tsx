@@ -1,4 +1,4 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useMemo, useState} from 'react';
 
 interface OverlayCxtProps {
   isVisible: boolean;
@@ -16,17 +16,19 @@ export const OverlayProvider: React.FC = ({children}) => {
   const [OverlayContent, setOverlayContent] = useState<React.ReactNode>();
   const [onBackdropPressCb, setBackdropPressCb] = useState(undefined);
 
+  const value = useMemo(
+    () => ({
+      isVisible,
+      setVisible,
+      OverlayContent,
+      setOverlayContent,
+      onBackdropPressCb,
+      setBackdropPressCb,
+    }),
+    [isVisible, OverlayContent, onBackdropPressCb],
+  );
+
   return (
-    <OverlayContext.Provider
-      value={{
-        isVisible,
-        setVisible,
-        OverlayContent,
-        setOverlayContent,
-        onBackdropPressCb,
-        setBackdropPressCb,
-      }}>
-      {children}
-    </OverlayContext.Provider>
+    <OverlayContext.Provider value={value}>{children}</OverlayContext.Provider>
   );
 };
